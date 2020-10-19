@@ -15,7 +15,7 @@ public class GeneralDnsField {
     }
 //Assuming that the id is valid, converts this general message field to bytes.
     public byte[] toBytes() {
-        return new byte[] {(byte)(value/POSSIBLE_BYTES), (byte)(value%POSSIBLE_BYTES)};
+        return Utils.toBytes(value);
     }
 }
 
