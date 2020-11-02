@@ -4,10 +4,13 @@ public class DnsMessageBuilder {
 //There will be an instance variable for each field of a dns message. However, the instance variables will not be final since I intend for method calls to change their values.
     private GeneralDnsField id;
     private Flags flags;
+//After some research, I have determined that the count fields at the end of the header shouldn't have their own fields because I would have to update them every time I add a question.
+    private QuestionSection questionSection;
 //My policy on constructors is that they should be used to initialize objects to a reasonable default state. Some people like to put program logic in the constructor, but I find that confusing because it makes initializing instances of the class more difficult.
     public DnsMessageBuilder() throws InvalidIdException {
         this.id = new GeneralDnsField(0);
         this.flags = new Flags();
+        this.questionSection = new QuestionSection();
     }
     /**
     sets the id for this dns message.
@@ -50,5 +53,24 @@ public class DnsMessageBuilder {
     */
     public void setRcode(Rcode rc) {
         rc.setFlags(flags);
+    }
+    /**
+    Adds a question to the question section.
+    By default, the question section is empty.
+    @param name the domain name to be requested.
+    @param type the type of resource record to be requested.
+    @param qclass the class of resource record to be requested.
+    @throws InvalidNameException if the domain name is invalid.
+    */
+    public void addQuestion(String name, Qtype type, Qclass qclass) throws InvalidNameException, TooManyQuestionsException {
+        questionSection.addQuestion(name, type, qclass);
+    }
+    /**
+    Removes a question from the question section.
+    @param index the index of the question to be removed. The first question in the list is at index 0; if there are n questions currently in the list, the last one is at index n-1. Since the rfc doesn't specify the order in which questions are to be stored, I have chosen to keep them in the order in which they were added.
+    @throws QuestionDoesNotExistException if the index is not in [0, n-1]
+    */
+    public void removeQuestion(int index) throws QuestionDoesNotExistException {
+        questionSection.removeQuestion(index);
     }
 }
