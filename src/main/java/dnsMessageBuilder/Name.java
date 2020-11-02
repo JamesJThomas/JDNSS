@@ -28,7 +28,7 @@ public class Name {
     */
     public Name(String name) throws InvalidNameException {
         try {
-            labels = new ArrayList();
+            labels = new ArrayList<Label>();
             populateLabels(name);
         } catch(InvalidLabelException e) {
             throw new InvalidNameException("invalid name", e);
@@ -46,7 +46,7 @@ public class Name {
     */
     public byte[] toBytes() {
 //This is the most efficient algorithm I could find.
-        List<Byte> allBytes = new ArrayList();
+        List<Byte> allBytes = new ArrayList<>();
         for(Label label: labels) {
             for(byte b: label.toBytes()) {
                 allBytes.add(b);
@@ -54,7 +54,6 @@ public class Name {
         }
 //Forgot to add the terminating null byte.
         allBytes.add((byte)0);
-
         byte[] result = new byte[allBytes.size()];
         int pos = 0;
         for(Byte b: allBytes) {
