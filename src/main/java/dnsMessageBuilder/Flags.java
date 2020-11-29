@@ -2,7 +2,7 @@ package dnsMessageBuilder;
 //This class represents all the flags that are set in a dns message.
 import java.util.Set;
 import java.util.EnumSet;
-public class Flags {
+public class Flags implements Convertable {
     private Set<HeaderFlags> flags;
 //Constructor
     public Flags() {
