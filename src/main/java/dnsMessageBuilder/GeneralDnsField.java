@@ -1,6 +1,6 @@
 //This class is used to represent a general unsigned 16-bit number that is used in many places in a dns message. I am writing a class for this because I don't want to duplicate the logic for this class everywhere it is used.
 package dnsMessageBuilder;
-public class GeneralDnsField {
+public class GeneralDnsField implements Convertable {
 //There is no unsigned 16-bit type, so I am forced to use int.
     private int value;
     public static final int UNSIGNED_SHORT_MAX = 65535;
