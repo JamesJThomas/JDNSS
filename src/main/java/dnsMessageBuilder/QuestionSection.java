@@ -7,7 +7,7 @@ Since a dns message header specifies the number of questions using a 16-bit valu
 package dnsMessageBuilder;
 import java.util.List;
 import java.util.ArrayList;
-public class QuestionSection {
+public class QuestionSection implements Convertable {
     private List<Question> questions;
     public static final int QUESTION_LIMIT = 65535;
     /**
